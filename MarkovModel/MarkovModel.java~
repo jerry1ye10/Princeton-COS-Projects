@@ -1,0 +1,67 @@
+import java.util.HashMap;
+//import java.util.map;
+import java.util.*;
+
+public class MarkovModel {
+
+    // creates a Markov model of order k for the specified text
+  private String text;
+  private int order;
+  private HashMap<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+  public MarkovModel(String text, int k){
+    text = text;
+    order = k;
+    generateMap();
+      }
+  public boolean generateMap(){
+    System.out.println(text);
+    for(int i = 0; i< text.length()-4;i++){
+      String str = text.substring(i,i+2);
+      if (map.containsKey(str)){
+        map.get(str).add(text.substring(i+2,i+3));
+      }
+      else {
+        ArrayList newArrList = new ArrayList<String>();
+        newArrList.add(text.substring(i+2,i+3));
+        map.put(str, newArrList);
+      }
+    }
+    return true;
+  }
+
+    // returns the order k of this Markov model
+  public int order(){
+    return order;
+  }
+    // returns a string representation of the Markov model (as described below)
+  public String toString(){
+    String retStr = new String();
+    for (String key: map.keySet()){
+      System.out.println(map.get(key));
+    }
+    return "";
+  }
+
+    // returns the number of times the specified kgram appears in the text
+  public int freq(String kgram){
+    return 0;
+  }
+
+    // returns the number of times the character c follows the specified
+    // kgram in the text
+  public int freq(String kgram, char c){
+    return 0;
+  }
+    // returns a random character that follows the specified kgram in the text,
+    // chosen with weight proportional to the number of times that character
+    // follows the specified kgram in the text
+  public char random(String kgram){
+    return 'c'; 
+  }
+
+    // tests this class by directly calling all instance methods
+  public static void main(String[] args){
+    MarkovModel m = new MarkovModel("qewqewqdasdafsaewq", 2);
+    System.out.println(m);
+  }
+}

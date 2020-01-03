@@ -5,14 +5,17 @@ import java.util.Arrays;
 public class Board{
     public int[][] board;
     public int moves;
+    public Board parent;
 
     public Board(int[][] tiles){
       board = tiles;
-      moves = 0; 
+      moves = 0;
+      parent = null;
     }
-    public Board(int[][] tiles,int m){
+    public Board(int[][] tiles,int m, Board b){
       board = tiles;
       moves = m;
+      parent = b; 
     }
 
 

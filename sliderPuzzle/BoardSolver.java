@@ -1,5 +1,5 @@
 public class BoardSolver{
-  public BoardSolver(Board initial){ 
+  public BoardSolver(Board initial){
     BoardCompare bc = new BoardCompare();
     MinPQ<Board> pq = new MinPQ(bc);
     pq.insert(initial);
@@ -7,11 +7,15 @@ public class BoardSolver{
     Board target = new Board(b);
     while (true){
       Board current = pq.delMin();
-      System.out.println(current);
+      //System.out.println(current);
       int a = current.manhattan() + current.moves;
-      System.out.println(a);
       if (target.equals(current)){
         System.out.println(current);
+        System.out.println(current.moves);
+        while (current.parent != null){
+          System.out.println(current.parent);
+          current = current.parent;
+        }
         break;
       }
       else{
@@ -52,7 +56,7 @@ public class BoardSolver{
     int temp = b[r][c];
     b[r][c] = b[r][c+1];
     b[r][c+1] = temp;
-    Board b1 = new Board(b, initial.moves + 1);
+    Board b1 = new Board(b, initial.moves + 1,initial);
     return b1;
 
   }
@@ -66,7 +70,7 @@ public class BoardSolver{
     int temp = b[r][c];
     b[r][c] = b[r-1][c];
     b[r-1][c] = temp;
-    Board b1 = new Board(b, initial.moves + 1);
+    Board b1 = new Board(b, initial.moves + 1,initial);
     return b1;
 
   }
@@ -80,7 +84,7 @@ public class BoardSolver{
     int temp = b[r][c];
     b[r][c] = b[r+1][c];
     b[r+1][c] = temp;
-    Board b1 = new Board(b, initial.moves + 1);
+    Board b1 = new Board(b, initial.moves + 1,initial);
     return b1;
 
   }
@@ -94,7 +98,7 @@ public class BoardSolver{
     int temp = b[r][c];
     b[r][c] = b[r][c-1];
     b[r][c-1] = temp;
-    Board b1 = new Board(b, initial.moves + 1);
+    Board b1 = new Board(b, initial.moves + 1,initial);
     return b1;
 
   }
